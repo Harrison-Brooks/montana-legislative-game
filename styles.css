@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a3c6d, #2a5998);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+.screen {
+    padding: 40px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    color: #1a3c6d;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.instructions {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #d62b39;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stats div {
+    background-color: #f7f7f7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #1a3c6d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.card {
+    aspect-ratio: 0.75;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+.card-front {
+    background-color: #1a3c6d;
+    color: white;
+    font-size: 2em;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgMTBoNDB2M0gweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiAvPgo8cGF0aCBkPSJNMCAyMGg0MHYzSDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIC8+CjxwYXRoIGQ9Ik0wIDMwaDQwdjNIMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIgLz4KPC9zdmc+');
+}
+
+.card-back {
+    background-color: white;
+    color: #333;
+    font-size: 0.9em;
+    transform: rotateY(180deg);
+    border: 2px solid #1a3c6d;
+    overflow-y: auto;
+}
+
+.bill-number {
+    font-size: 1.3em;
+    color: #1a3c6d;
+}
+
+.bill-description {
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.matched {
+    pointer-events: none;
+}
+
+.matched .card-inner {
+    box-shadow: 0 0 0 2px #28a745, 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.win-stats {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto 30px;
+    max-width: 400px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.win-stats span {
+    font-weight: bold;
+    color: #e63946;
+}
+
+@media (max-width: 768px) {
+    .screen {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .stats {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #game-board {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+} 
